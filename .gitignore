@@ -1,0 +1,69 @@
+
+# 编译输出与中间文件
+build/
+out/
+bin/
+Release/
+Debug/
+x64/
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.obj
+*.o
+*.pdb
+*.ilk
+*.exp
+
+#Qt/CMake 本地自动生成文件 ---
+CMakeLists.txt.user
+CMakeCache.txt
+CMakeFiles/
+CMakeSettings.json
+.cmake/
+# Qt Creator 的本地项目配置
+*.pro.user
+*.pro.user.*
+# Qt 6 模块生成的额外文件
+.qt/
+# QML 语言服务器缓存
+.qmlls.ini
+
+# 商业库二进制（不进仓库）
+libs/libxl.lib
+
+# 数据库与本地运行时数据 ---
+*.db
+*.db-journal
+*.log
+exports/
+temp/
+
+#  编辑器与 IDE 专用 ---
+.vs/
+.vscode/
+.idea/
+*.swp
+*.bak
+*.user
+Thumbs.db
+.DS_Store
+
+# Qt moc / rcc / uic
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+ui_*.h
+
+# Qt QML cache
+*.qmlc
+*.jsc
+
+# CMake multi-build
+build-*/
+cmake-build-*/
+
+# Windows runtime
+*.stackdump

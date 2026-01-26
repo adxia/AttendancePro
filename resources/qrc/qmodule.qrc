@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/qml">
+        <file>../qml/Title.qml</file>
+        <file>../qml/Main.qml</file>
+        <file>../qml/Max.qml</file>
+        <file>../qml/Minize.qml</file>
+        <file>../qml/Plan.qml</file>
+        <file>../qml/Logo.qml</file>
+        <file>../qml/Closeimg.qml</file>
+        <file>../qml/Home.qml</file>
+        <file>../qml/HomeP.qml</file>
+        <file>../qml/PlanP.qml</file>
+        <file>../qml/Processpage.qml</file>
+        <file>../qml/Setpage.qml</file>
+        <file>../qml/Add.qml</file>
+    </qresource>
+</RCC>
