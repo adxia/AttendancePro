@@ -1,14 +1,19 @@
 # AttendancePro
 
 ## 🚀 UI展示
-<details>
-<summary>📸 界面预览</summary>
+
+### 主页
 ![AttendancePro Main UI](screenshots/image.png)
 
+### 规则配置
 ![AttendancePro Rule UI](screenshots/image-1.png)
 
-![AttendancePro Setting UI](screenshots/image-2.png)
-</details>
+### 规则新增
+![AttendancePro RuleAdd UI](screenshots/image-2.png)
+
+### 设置
+![AttendancePro Setting UI](screenshots/image-3.png)
+
 
 AttendancePro 是一款基于 **Qt 6.9 + C++** 开发的高性能桌面端考勤数据处理工具。  
 它专注于解析异构 Excel 考勤报表，通过内置引擎进行自动化分析，并精准写入预设的模板表中。
