@@ -4,7 +4,9 @@
 <details>
 <summary>📸 界面预览</summary>
 ![AttendancePro Main UI](screenshots/image.png)
+
 ![AttendancePro Rule UI](screenshots/image-1.png)
+
 ![AttendancePro Setting UI](screenshots/image-2.png)
 </details>
 
