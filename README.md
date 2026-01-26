@@ -78,3 +78,8 @@ AttendancePro 是一款基于 **Qt 6.9 + C++** 开发的高性能桌面端考勤
 3. 等待 CMake 配置完成
 4. 点击 **Build**（快捷键 `Ctrl + B`）进行构建
 
+
+## Licenses
+
+See [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md)
+
