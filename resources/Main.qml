@@ -58,7 +58,7 @@ ApplicationWindow {
     }
 
     function showMessage(mtype,msg,title) {
-        var component = Qt.createComponent("./common/MessagePopup.qml");
+        var component = Qt.createComponent("./qml/common/MessagePopup.qml");
         if (component.status === Component.Ready) {
             popupSeq += 1
             var name = "popup_" + popupSeq
