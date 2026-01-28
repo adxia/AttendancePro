@@ -119,8 +119,7 @@ bool HolidayManager::writeHoliday(QByteArray data){
     auto doc = QJsonDocument::fromJson(data, &err);
 
     if (err.error != QJsonParseError::NoError) {
-        emit MessageCenter::instance()->erromessage( "节假日数据错误",
-                                                    "JSON 解析失败：" + err.errorString());
+        emit MessageCenter::instance()->erromessage( "节假日数据错误","JSON 解析失败：" + err.errorString());
         return false;
     }
     if (doc.isNull() || doc.isEmpty()) {
