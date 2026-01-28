@@ -5,6 +5,8 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QJsonValue>
+#include <QJsonDocument>
+#include <QJsonParseError>
 #include <QDate>
 #include <QDir>
 #include "MessageCenter.h"
