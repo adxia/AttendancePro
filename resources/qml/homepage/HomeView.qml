@@ -51,6 +51,7 @@ MainView {
             lineHeight: 1.3
             lineHeightMode: Text.ProportionalHeight
             color: Theme[fileManager.themeColors].textSecondary
+            //color:"white"
             font.weight: 400
         }
 

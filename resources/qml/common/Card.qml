@@ -23,12 +23,12 @@ Item {
         anchors.fill: parent
         color:Theme[fileManager.themeColors].backgroundPrimary
         radius:6
-        Behavior on color{
-            ColorAnimation {
-                        duration: Theme.changetime  // 动画时长，毫秒
-                        easing.type: Easing.Linear
-                    }
-        }
+        // Behavior on color{
+        //     ColorAnimation {
+        //                 duration: Theme.changetime  // 动画时长，毫秒
+        //                 easing.type: Easing.Linear
+        //             }
+        // }
     }
     // Rectangle{
     //     anchors.top: parent.top
@@ -82,12 +82,12 @@ Item {
         radius: 2
         width:parent.width - 40
         color:Theme[fileManager.themeColors].searchbackground
-        Behavior on color{
-            ColorAnimation {
-                        duration: Theme.changetime  // 动画时长，毫秒
-                        easing.type: Easing.Linear
-                    }
-        }
+        // Behavior on color{
+        //     ColorAnimation {
+        //                 duration: Theme.changetime  // 动画时长，毫秒
+        //                 easing.type: Easing.Linear
+        //             }
+        // }
     }
 
 }

@@ -26,31 +26,30 @@ int main(int argc, char *argv[]) {
     int physWidth = 1920;
 
     #ifdef Q_OS_WIN
-    // 关键：强制让当前进程感知 DPI，否则系统会给假数据
-    // 注意：这必须在所有 GUI 操作之前调用
-    if (!SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2)) {
-        SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE);
-    }
-    HDC hdc = GetDC(NULL);
-    int dpiX = GetDeviceCaps(hdc, LOGPIXELSX); // 此时应该能拿到 144, 192 等
-    physWidth = GetDeviceCaps(hdc, DESKTOPHORZRES);
-    ReleaseDC(NULL, hdc);
-    systemScale = dpiX / 96.0f;
+        // 强制让windows当前进程感知 DPI
+        if (!SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2)) {
+            SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE);
+        }
+        HDC hdc = GetDC(NULL);
+        //拿Dpi 1440、1080
+        int dpiX = GetDeviceCaps(hdc, LOGPIXELSX);
+        physWidth = GetDeviceCaps(hdc, DESKTOPHORZRES);
+        ReleaseDC(NULL, hdc);
+        systemScale = dpiX / 96.0f;
     #endif
     float targetScale;
     // 逻辑计算
     if (physWidth <= 2200) {
         targetScale = 1.0f;
     } else if (physWidth <= 2800) {
-        targetScale = qMin(systemScale, 1.25f);
+        targetScale = qMin(systemScale, 1.5f);
     } else {
-        targetScale = qMin(systemScale, 2.15f); // 4K 压制到 2.0
+        targetScale = qMin(systemScale, 2.25f);
     }
 
-    // 计算校准值：你想达到的目标 / 系统已经给你的
-    // 比如 4K 系统给 3.0，你想 2.0，那么 calibration = 0.666
     float calibration = targetScale / systemScale;
 
+    //设置缩放系数
     qputenv("QT_SCALE_FACTOR", QByteArray::number(calibration, 'f', 2));
 
     #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -76,7 +75,7 @@ int main(int argc, char *argv[]) {
     QFont font(family);
     app.setFont(font);
     QSurfaceFormat fmt;
-    fmt.setSwapInterval(1); // 1 表示开启VSync（等待一个刷新周期）
+    fmt.setSwapInterval(1);
     QSurfaceFormat::setDefaultFormat(fmt);
     QQmlApplicationEngine engine;
     FileManager* filemanager = new FileManager();
@@ -141,9 +140,6 @@ int main(int argc, char *argv[]) {
         &app,
         []() { QCoreApplication::exit(-1);},
         Qt::QueuedConnection);
-    // QCoreApplication::setAttribute(Qt::AA_UseDesktopOpenGL)
-
-
 
     QSharedMemory shared("AttendanceUniqueKey");
     if (!shared.create(1)) {
@@ -158,7 +154,6 @@ int main(int argc, char *argv[]) {
             auto *window = qobject_cast<QQuickWindow *>(rootObjects.first());
             if (window) {
                 HWND hwnd = reinterpret_cast<HWND>(window->winId());
-                //engine.rootContext()->setContextProperty("mainWindow", window1);
                 if (hwnd) {
                     enableWindowShadow windows{hwnd};
                     windows.enableShadow(window);

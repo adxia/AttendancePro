@@ -51,12 +51,12 @@ Item {
                            // 你可以继续补充其它状态变量
                        }
         }
-        Behavior on color{
-            ColorAnimation {
-                        duration: titleBar.colorchanget   // 动画时长，毫秒
-                        easing.type: Easing.Linear
-                    }
-        }
+        // Behavior on color{
+        //     ColorAnimation {
+        //                 duration: titleBar.colorchanget   // 动画时长，毫秒
+        //                 easing.type: Easing.Linear
+        //             }
+        // }
 
         Timer{
             id: debounceTimer

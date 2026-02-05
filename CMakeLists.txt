@@ -39,7 +39,6 @@ qt_add_qml_module(AttendancePro
     # 这里的路径必须是相对于 CMakeLists.txt 的真实物理路径
             resources/Main.qml
             resources/Themes/Theme.qml
-
             #qml
             resources/qml/common/AlertPopup.qml
             resources/qml/common/Card.qml
@@ -115,6 +114,8 @@ qt_add_qml_module(AttendancePro
         src/utils/MessageCenter.cpp
         src/utils/TimeUtils.cpp
         src/utils/WindowUtil.cpp
+    RESOURCES resources/frag/background.frag
+    RESOURCES resources/frag/reveal.frag
 )
 
 #头文件

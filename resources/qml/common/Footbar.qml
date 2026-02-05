@@ -35,12 +35,12 @@ Item {
             color:parent.color
         }
 
-        Behavior on color{
-            ColorAnimation {
-                        duration: Theme.changetime   // 动画时长，毫秒
-                        easing.type: Easing.Linear
-                    }
-        }
+        // Behavior on color{
+        //     ColorAnimation {
+        //                 duration: Theme.changetime   // 动画时长，毫秒
+        //                 easing.type: Easing.Linear
+        //             }
+        // }
         Text{
             // anchors.verticalCenter:parent.verticalCenter
             anchors.top: parent.top

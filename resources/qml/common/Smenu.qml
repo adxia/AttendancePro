@@ -67,24 +67,25 @@ Item {
         Rectangle {
             anchors.fill: parent
             color: Theme[fileManager.themeColors].backgroundPrimary
-            Behavior on color{
-                ColorAnimation {
-                            duration: Theme.changetime  // 动画时长，毫秒
-                            easing.type: Easing.Linear
-                        }
-            }
+            // Behavior on color{
+            //     ColorAnimation {
+            //                 duration: Theme.changetime  // 动画时长，毫秒
+            //                 easing.type: Easing.Linear
+            //             }
+            // }
+
             Rectangle {
                 anchors.top: parent.top
                 height: 50
                 width: parent.width
                 anchors.topMargin: 0
                 color:"transparent"
-                Behavior on color{
-                    ColorAnimation {
-                                duration: Theme.changetime // 动画时长，毫秒
-                                easing.type: Easing.Linear
-                            }
-                }
+                // Behavior on color{
+                //     ColorAnimation {
+                //                 duration: Theme.changetime // 动画时长，毫秒
+                //                 easing.type: Easing.Linear
+                //             }
+                // }
 
                 Row {
                     id: logo
@@ -98,6 +99,7 @@ Item {
                         width:48
                         height:46
                         radius:6
+
                         color:Theme[fileManager.themeColors].backgroundPrimary
                         Text{
                             id:slidericon2
@@ -110,12 +112,12 @@ Item {
                             color:Theme[fileManager.themeColors].primaryColor
                             font.weight: 500
                         }
-                        Behavior on color{
-                            ColorAnimation {
-                                        duration: Theme.changetime   // 动画时长，毫秒
-                                        easing.type: Easing.Linear
-                                    }
-                        }
+                        // Behavior on color{
+                        //     ColorAnimation {
+                        //                 duration: Theme.changetime   // 动画时长，毫秒
+                        //                 easing.type: Easing.Linear
+                        //             }
+                        // }
                         MouseArea {
                             id: sliderArea2
                             anchors.fill: parent
@@ -146,12 +148,12 @@ Item {
                     radius: 6
                     color: Theme[fileManager.themeColors].menubackground
                     y: menu.children[0].y
-                    Behavior on color{
-                        ColorAnimation {
-                                    duration: Theme.changetime   // 动画时长，毫秒
-                                    easing.type: Easing.Linear
-                                }
-                    }
+                    // Behavior on color{
+                    //     ColorAnimation {
+                    //                 duration: Theme.changetime   // 动画时长，毫秒
+                    //                 easing.type: Easing.Linear
+                    //             }
+                    // }
                     Behavior on y {
                         YAnimator{
                             duration: 120

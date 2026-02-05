@@ -13,4 +13,8 @@
         <file>images/shadow_rect.png</file>
         <file>images/shadow_rect_black.png</file>
     </qresource>
+    <qresource prefix="/frag">
+        <file>frag/background.frag.qsb</file>
+        <file>frag/reveal.qsb</file>
+    </qresource>
 </RCC>

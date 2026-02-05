@@ -103,15 +103,6 @@ ApplicationWindow {
             }
         }
     }
-    AlertPopup {
-        id: dialog
-        title: "提示"
-        content: "规则删除后将无法还原,你需要重新设计,请确认是否删除?"
-        property int index: -1
-        property string key
-        onAccepted:()=>{fileManager.removeRuleCover(index,key); showMessage("删除成功")}
-        onRejected:()=>{}
-    }
 
     // visible:false
     color: Theme[fileManager.themeColors].backgroundPrimary
@@ -123,14 +114,12 @@ ApplicationWindow {
             property: "opacity"
             to: 0.0
             duration: 160
-            // 3. 动画完成后，安全地退出应用
         }
         PropertyAnimation {
             target: mainWindow
             property: "y"
             to: mainWindow.y - 20
             duration: 160
-            // 3. 动画完成后，安全地退出应用
         }
         onFinished: {
            isfirstclose = false;
@@ -154,16 +143,16 @@ ApplicationWindow {
         id:windowutils
     }
     //窗口动画层
+
     Rectangle {
         id: background
         anchors.left:parent.left
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        anchors.topMargin: 50
+        anchors.topMargin: 0
         color:"transparent"
         smooth: true
-
         MouseArea {
             anchors.fill: parent
             onClicked: {
@@ -171,6 +160,9 @@ ApplicationWindow {
             }
         }
     }
+    Item {
+       id: sceneRoot
+       anchors.fill: parent
 
     Title {
         id: titleBar
@@ -180,18 +172,20 @@ ApplicationWindow {
         anchors.right: parent.right
         titlebarcolor: Theme[fileManager.themeColors].titlebackground
         isMaximized : mainWindow.visibility === Window.Maximized
-        // title_height: 40
         z: 1
         onChangeTheme: {
-            Theme.changetime = 200;
-            if(fileManager.themeColors === "lightTheme")
-            {
-                fileManager.themeColors= "darkTheme";
-            }
-            else{
-                fileManager.themeColors = "lightTheme";
-            }
+            revealShader.center = Qt.point(0.8, 0.05)
 
+           sceneRoot.grabToImage(function(result) {
+               snapshotBridge.source = result.url;
+               themeTransitionLayer.visible = true;
+               if (fileManager.themeColors === "lightTheme") {
+                   fileManager.themeColors = "darkTheme"
+               } else {
+                   fileManager.themeColors = "lightTheme"
+               }
+               revealAnim.restart();
+           })
         }
         onMinimizeClicked: {windowutils.changewindowstate(mainWindow,"minimize"); }
         onMaximizeClicked: {
@@ -239,14 +233,6 @@ ApplicationWindow {
         y:0
         x:Theme.sliderwidth
         color:Theme[fileManager.themeColors].contentbackground
-
-        Behavior on color{
-            ColorAnimation {
-                    duration: Theme.changetime  // 动画时长，毫秒
-                    easing.type: Easing.Linear
-                 }
-        }
-
         states: [
                 State {
                     name: "Expanded"
@@ -269,7 +255,7 @@ ApplicationWindow {
             ]
         transitions: [
                 Transition {
-                    // 从任意状态到任意状态
+
                     from: "Expanded"
                     to: "Collapsed"
                     ParallelAnimation {
@@ -277,7 +263,7 @@ ApplicationWindow {
                             NumberAnimation {
                                 target: contentback
                                 property: "width"
-                                duration: Theme.xchangetime // 与 x 动画时长保持一致
+                                duration: Theme.xchangetime
                                 easing.type: Easing.Linear
                             }
                             NumberAnimation {
@@ -293,11 +279,10 @@ ApplicationWindow {
                 from: "Collapsed"
                 to: "Expanded"
                 ParallelAnimation {
-                    // 同时对 width 和 x 进行动画
                         NumberAnimation {
                             target: contentback
                             property: "width"
-                            duration: Theme.xchangetime // 与 x 动画时长保持一致
+                            duration: Theme.xchangetime
                             easing.type: Easing.Linear
                         }
                         NumberAnimation {
@@ -382,6 +367,44 @@ ApplicationWindow {
                 set.show = true
             }
 
+        }
+    }
+    }
+    Item {
+        id: themeTransitionLayer
+        anchors.fill: parent
+        z: 99
+        visible: revealAnim.running
+        Image {
+            id: snapshotBridge
+            anchors.fill: parent
+            visible: false
+            smooth: true
+        }
+        ShaderEffect {
+            id: revealShader
+            z: 9999
+            anchors.fill: parent
+            property variant source: snapshotBridge
+            property point center: Qt.point(0.5, 0.5)
+            property real radius: 0.0
+            property real aspect: width / height
+            fragmentShader:"qrc:/frag/frag/reveal.qsb"
+        }
+
+        NumberAnimation {
+            id: revealAnim
+            target: revealShader
+            property: "radius"
+            from: 0.0
+            to: 3
+            duration: 3000
+            easing.type: Easing.OutQuart
+            onStarted: revealShader.visible = true
+            onFinished: {
+                themeTransitionLayer.visible = false
+                snapshotBridge.source = ""
+                }
         }
     }
 }
